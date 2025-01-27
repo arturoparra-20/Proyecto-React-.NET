@@ -1,0 +1,21 @@
+# Ignorar la carpeta de Visual Studio que contiene archivos temporales y de configuración
+.vs/
+.vscode/
+
+# Ignorar las carpetas de compilación de .NET (bin y obj)
+bin/
+obj/
+
+# Ignorar archivos específicos de Visual Studio
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Ignorar las dependencias de Node.js (en caso de que uses React en el frontend)
+node_modules/
+
+# Ignorar los archivos de log
+*.log
+
+# Otros archivos o carpetas que no desees subir

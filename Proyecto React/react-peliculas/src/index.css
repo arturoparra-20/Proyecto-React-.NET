@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-900 text-white font-display; 
+  }
+}
+
+
+.nav-link-active {
+  @apply text-blue-400 font-bold;
+}
+
+.nav-link-hover:hover {
+  @apply scale-105; 
+}
+
+
+.nav-link {
+  @apply text-white font-semibold text-lg no-underline hover:text-blue-400 transition-all duration-300 bg-transparent border-none outline-none shadow-none;
+}
+
+.nav-link-main {
+  @apply text-6xl font-bold no-underline text-white transition-all duration-300 bg-transparent border-none outline-none shadow-none;
+}
+
+.nav-link-main:hover {
+  @apply scale-110 bg-transparent border-none outline-none shadow-none;
+}
+
+
+
+
+
