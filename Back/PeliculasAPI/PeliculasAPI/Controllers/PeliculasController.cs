@@ -27,7 +27,7 @@ namespace PeliculasAPI.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<PeliculaDTO>> Get (int id)
         {
-            var pelicula = context.Peliculas
+            var pelicula = await context.Peliculas
                 .Include(x => x.PeliculasGeneros).ThenInclude(x => x.Genero)
                 .Include(x => x.PeliculasActores).ThenInclude(x => x.Actor)
                 .Include(x => x.PeliculasCines).ThenInclude(x => x.Cine)
