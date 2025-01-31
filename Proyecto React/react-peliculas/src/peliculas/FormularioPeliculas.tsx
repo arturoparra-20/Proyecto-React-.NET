@@ -41,18 +41,6 @@ export default function FormularioPeliculas (props: FormularioPeliculasProps){
         );
     };
 
-    
-       const listadoActores: actorPeliculaDTO[] = [
-        { 
-            id: 1, nombre: 'Arturo', personaje:'', foto:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Deadpool_2_Japan_Premiere_Red_Carpet_Ryan_Reynolds_%28cropped%29.jpg/640px-Deadpool_2_Japan_Premiere_Red_Carpet_Ryan_Reynolds_%28cropped%29.jpg'
-        },
-        { 
-            id: 2, nombre: 'Joao', personaje:'', foto:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Logan_Japan_Premiere_Red_Carpet-_Hugh_Jackman_%2838445328406%29_%28rotated%29.jpg/800px-Logan_Japan_Premiere_Red_Carpet-_Hugh_Jackman_%2838445328406%29_%28rotated%29.jpg'
-        },
-        { 
-            id: 3, nombre: 'David', personaje:'', foto:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Logan_Japan_Premiere_Red_Carpet-_Hugh_Jackman_%2838445328406%29_%28rotated%29.jpg/800px-Logan_Japan_Premiere_Red_Carpet-_Hugh_Jackman_%2838445328406%29_%28rotated%29.jpg'
-        }
-      ]
 
 
     const navigate = useNavigate();
@@ -70,7 +58,7 @@ export default function FormularioPeliculas (props: FormularioPeliculasProps){
         })}
         >
             {formikProps => (
-                <Form className="text-white">
+                <Form >
                     <FormGroupText label="Titulo" campo="titulo"/>
                     <FormGroupCheckbox label="En Cines" campo= "enCines"/>
                     <FormGroupText label="Trailer" campo ="trailer"/>
@@ -107,7 +95,7 @@ export default function FormularioPeliculas (props: FormularioPeliculasProps){
                         onAdd={handleAdd}
                         onRemove={handleRemove}
                         actores = {actoresSeleccionados}
-                        listadoActores={listadoActores}
+                        // listadoActores={listadoActores}
                         placeholder="Buscar un Actor"
                         
                         

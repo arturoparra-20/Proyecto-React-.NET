@@ -9,6 +9,7 @@ import EditarGeneros from "./generos/EditarGenero";
 import IndiceGeneros from "./generos/IndiceGeneros";
 import LandingPage from "./LandingPage";
 import CrearPeliculas from "./peliculas/CrearPeliculas";
+import DetallePeliculas from "./peliculas/DetallePeliculas";
 import EditarPeliculas from "./peliculas/EditarPeliculas";
 import FiltroPeliculas from "./peliculas/FiltroPeliculas";
 import RedirectALanding from "./utils/RedirectALanding";
@@ -23,11 +24,12 @@ const rutas = [
     {path: '/actores', componente: IndiceActores},
 
     {path: '/cines/crear', componente: CrearCines},
-    {path: '/cines/editar', componente: EditarCines},
+    {path: '/cines/editar/:id', componente: EditarCines},
     {path: '/cines', componente: IndiceCines},
 
     {path: '/peliculas/crear', componente: CrearPeliculas},
-    {path: '/peliculas/editar', componente: EditarPeliculas},
+    {path: '/pelicula/:id', componente: DetallePeliculas},
+    {path: '/peliculas/editar/:id', componente: EditarPeliculas},
     {path: '/peliculas/filtro', componente: FiltroPeliculas},
 
 

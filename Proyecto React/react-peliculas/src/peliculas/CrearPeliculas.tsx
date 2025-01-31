@@ -62,8 +62,9 @@ export default function CrearPeliculas(){
         cinesSeleccionados={[]}
         generosNoSeleccionados={generosNoSeleccionados}
         generosSeleccionados={[]}
-        modelo={{titulo: '', enCinces: false, trailer: '' }}
-        onSubmit={async valores => crear(valores)}
+        modelo={{titulo: '', enCines: false, trailer: '' }}
+        onSubmit={async valores => {{crear(valores) }{console.log(valores)}}
+        }
         /> : <Cargando/> }
         </>
     )

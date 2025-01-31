@@ -7,6 +7,7 @@ export default function IndiceActores() {
 
     return (
         <>
+        <div className=" bg-gray-800 heigth to-100%">
             <IndiceEntidad<actorDTO>
                 url={urlActores} urlCrear="actores/crear" titulo="Actores"
                 nombreEntidad="Actor"
@@ -36,6 +37,8 @@ export default function IndiceActores() {
 
 
             </IndiceEntidad>
+
+            </div>
 
         </>
     )

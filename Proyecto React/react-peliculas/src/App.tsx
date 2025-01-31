@@ -12,8 +12,8 @@ function App() {
     <>
       <BrowserRouter>
         <Menu />
-        <div className='flex-grow mx-auto py-8 grid-container bg-gray-800'>
-          <div className='container'>
+        <div className='flex flex-col min-h-screen justify-center bg-gray-800 text-white'>
+          <main className='flex-1 container mx-auto px-4 py-8'>
             <Routes>
               {rutas.map(ruta => (
                 <Route
@@ -23,7 +23,7 @@ function App() {
                 />
               ))}
             </Routes>
-          </div>
+          </main>
 
         </div>
        <Footer/> 

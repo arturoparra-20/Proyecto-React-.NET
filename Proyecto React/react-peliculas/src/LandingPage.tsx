@@ -10,42 +10,11 @@ export default function LandingPage() {
     const timerId = setTimeout(() => {
       SetPeliculas({
         enCartelera: [
-          {
-            id: 1,
-            titulo: "SpiderMan Far From Home",
-            poster: "https://preview.redd.it/1vso0vrm42j31.jpg?auto=webp&s=560d753f03d61e4fd76bfd42f4ed9fd5a0232ddc",
-          },
-          {
-            id: 2,
-            titulo: "Mohana",
-            poster: "https://resizer.glanacion.com/resizer/v2/FEQBNKCWQFERFMTLKZT7IVDBK4.png?auth=597b673543ad7c7870ee40a44eb667eab2a3a791090a7732afbb0c2776f34feb&width=210&height=300&smart=true",
-          },
         ],
+
         proximosEstrenos: [
-          {
-            id: 3,
-            titulo: "Soul",
-            poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTayKbVeMZsxTVNEsUolbgYwFEgg6KtDC2mRQ&s",
-          },
-        ],
-        carrusel: [
-          {
-            id: 1,
-            titulo: "Deadpool",
-            poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvRPPezEWZORRev9NjF1KpzBd4puhdzWDHqw&s",
-          },
-          {
-            id: 1,
-            titulo: "Deadpool",
-            poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvRPPezEWZORRev9NjF1KpzBd4puhdzWDHqw&s",
-          },
-          {
-            id: 1,
-            titulo: "Deadpool",
-            poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvRPPezEWZORRev9NjF1KpzBd4puhdzWDHqw&s",
-          },
-        
-        ],
+      
+        ]
 
 
       });

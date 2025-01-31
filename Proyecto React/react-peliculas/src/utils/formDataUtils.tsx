@@ -29,7 +29,7 @@ export function convertirPeliculaAFormData (pelicula: peliculaCreacionDTO): Form
     }
 
     formData.append('trailer', pelicula.trailer);
-    formData.append('enCines', String(pelicula.enCinces));
+    formData.append('enCines', String(pelicula.enCines));
 
     if(pelicula.fechaLanzamiento)
     {

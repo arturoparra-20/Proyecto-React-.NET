@@ -27,7 +27,7 @@ export default function IndiceGeneros() {
 
           {/* Tabla */}
           <div className="overflow-x-auto">
-            <table className="min-w-full border-collapse bg-gray-900 rounded-lg shadow-sm">
+            <table className="min-w-full border-collapse  rounded-lg shadow-sm">
               <thead className="bg-gray-800 text-gray-300 ">
                 <tr>
                   <th className="px-6 py-3 text-left text-sm font-bold">Acciones</th>

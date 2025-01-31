@@ -29,7 +29,7 @@ export default function EditarPeliculas(){
         cinesSeleccionados={cinesSeleccionados}
         generosNoSeleccionados={generosNoSeleccionados}
         generosSeleccionados={generosSeleccionados}
-        modelo={{titulo: 'Spiderman', enCinces: true, trailer: 'url', 
+        modelo={{titulo: 'Spiderman', enCines: true, trailer: 'url', 
             fechaLanzamiento: new Date('2019-01-01T00:00:00')
         }}
         onSubmit={valores => console.log(valores)}

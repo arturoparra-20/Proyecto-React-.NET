@@ -3,7 +3,7 @@ import { Field } from "formik";
 export default function FormGroupCheckbox (props: FormGroupCheckbox){
 
      return(
-        <div className="form-group from-check">
+        <div className="form-group form-check">
             <Field className="form-check-input" id={props.campo} name={props.campo}
             type="checkbox"
             />

@@ -33,7 +33,9 @@ namespace PeliculasAPI.Controllers
                 .Include(x => x.PeliculasCines).ThenInclude(x => x.Cine)
                 .FirstOrDefaultAsync(x =>  x.Id == id);
 
-            if(pelicula == null) { return NotFound(); }
+            if (pelicula == null) return NotFound("Película no encontrada");
+
+            if (pelicula == null) { return NotFound(); }
 
             var dto = mapper.Map<PeliculaDTO>(pelicula);
             dto.Actores = dto.Actores.OrderBy(x => x.Orden).ToList();

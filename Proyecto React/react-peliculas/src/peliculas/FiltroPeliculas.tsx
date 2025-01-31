@@ -46,14 +46,14 @@ export default function FiltroPeliculas() {
                             </div>
                             <div className="form-group mx-sm-3 mb-2">
                                 <Field className="form-check-input" id="proximosEstrenos"
-                                name="proximosEstrenos" type="chekbox"/>
+                                name="proximosEstrenos" type="checkbox"/>
                                 <label className="form-check-label"
                                 htmlFor="proximosEstrenos">Proximos Estrenos</label>
 
                             </div>
                             <div className="form-group mx-sm-3 mb-2">
                                 <Field className="form-check-input" id="enCines"
-                                name="enCines" type="chekbox"/>
+                                name="enCines" type="checkbox"/>
                                 <label className="form-check-label"
                                 htmlFor="proximosEstrenos">En Cines</label>
 
