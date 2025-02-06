@@ -1,39 +1,71 @@
-import { actorPeliculaDTO } from "../actores/actores.model";
-import { cineDTO } from "../cines/cines.model";
-import { generoDTO } from "../generos/genero.model";
+import axios, { AxiosResponse } from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { urlPeliculas } from "../utils/endpoints";
 import FormularioPeliculas from "./FormularioPeliculas";
+import { peliculaCreacionDTO, PeliculasPutGetDTO } from "./peliculas.model";
+import Cargando from "../utils/Cargando";
+import { convertirPeliculaAFormData } from "../utils/formDataUtils";
+import MostrarErrores from "../utils/MostrarErrores";
 
 export default function EditarPeliculas(){
 
-    const generosNoSeleccionados: generoDTO[] = [
-        {id: 3, nombre: 'Drama'} ]
-    const generosSeleccionados: generoDTO[] = [
-        {id: 1, nombre: 'Accion'}, 
-        {id: 2, nombre: 'Comedia'}, 
-         ]
+    const [pelicula, setPelicula] = useState<peliculaCreacionDTO>();
+    const [peliculaPutGet, setPeliculaPutGet] = useState<PeliculasPutGetDTO>();
+    const [errores, setErrores] = useState<string[]>([]);
+    const {id}: any = useParams();
+    const navigate = useNavigate();
+    useEffect(() => {
+        axios.get(`${urlPeliculas}/PutGet/${id}`)
+         .then((respuesta: AxiosResponse<PeliculasPutGetDTO>) => {
+            const modelo: peliculaCreacionDTO = {
 
-    const cinesSeleccionados: cineDTO[] = [{id: 1, nombre: 'Supercines'}]
-    const cinesNoSeleccionados: cineDTO[] = [ {id: 2, nombre: 'CineMark'}]
+                titulo: respuesta.data.pelicula.titulo,
+                enCines: respuesta.data.pelicula.enCines,
+                trailer: respuesta.data.pelicula.trailer,
+                posterURL: respuesta.data.pelicula.poster,
+                resumen: respuesta.data.pelicula.resumen,
+                fechaLanzamiento: new Date(respuesta.data.pelicula.fechaLanzamiento)  
+            };
+            setPelicula(modelo);
+            setPeliculaPutGet(respuesta.data);
+         })
+    }, [id])
 
-    const actoresSeleccionados: actorPeliculaDTO[] = [
-        { 
-            id: 1, nombre: 'Arturo', personaje:'', foto:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Deadpool_2_Japan_Premiere_Red_Carpet_Ryan_Reynolds_%28cropped%29.jpg/640px-Deadpool_2_Japan_Premiere_Red_Carpet_Ryan_Reynolds_%28cropped%29.jpg'
+    async function editar(peliculaEditar: peliculaCreacionDTO) {
+        try {
+            const formData = convertirPeliculaAFormData(peliculaEditar); 
+    
+            await axios({
+                method: 'put',
+                url: `${urlPeliculas}/${id}`,
+                data: formData,
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+    
+            navigate(`/pelicula/${id}`);
+    
+        } catch (error: any) {
+         
+            setErrores(error.response?.data);
         }
-    ]
+    }
+    
+
     return(
         <>
         <h3>Editar Peliculas</h3>
-        <FormularioPeliculas 
-        actoresSeleccionados={actoresSeleccionados}
-        cinesNoSeleccionados={cinesNoSeleccionados}
-        cinesSeleccionados={cinesSeleccionados}
-        generosNoSeleccionados={generosNoSeleccionados}
-        generosSeleccionados={generosSeleccionados}
-        modelo={{titulo: 'Spiderman', enCines: true, trailer: 'url', 
-            fechaLanzamiento: new Date('2019-01-01T00:00:00')
-        }}
-        onSubmit={valores => console.log(valores)}
-        /> 
+        <MostrarErrores errores={errores}/> 
+        {pelicula && peliculaPutGet ? <FormularioPeliculas 
+        actoresSeleccionados={peliculaPutGet.actores}
+        cinesNoSeleccionados={peliculaPutGet.cinesNoSeleccionados}
+        cinesSeleccionados={peliculaPutGet.cinesSeleccionados}
+        generosNoSeleccionados={peliculaPutGet.generosNoSeleccionados}
+        generosSeleccionados={peliculaPutGet.generosSeleccionados}
+        modelo={pelicula}
+        onSubmit={async valores => await editar(valores)}
+        />: <Cargando/>  }
+
         </>
     )
 }

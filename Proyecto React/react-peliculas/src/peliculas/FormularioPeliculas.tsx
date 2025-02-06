@@ -96,15 +96,10 @@ export default function FormularioPeliculas (props: FormularioPeliculasProps){
                         onRemove={handleRemove}
                         actores = {actoresSeleccionados}
                         // listadoActores={listadoActores}
-                        placeholder="Buscar un Actor"
-                        
-                        
+                        placeholder="Buscar un Actor"  
                         />
 
                     </div>
-
-
-
                     <Button disabled={formikProps.isSubmitting} type="submit">Enviar</Button>
                     <button className="btn btn-secundary" onClick={() => navigate('/')}>Cancelar</button>
                 </Form>

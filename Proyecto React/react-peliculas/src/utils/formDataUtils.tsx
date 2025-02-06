@@ -17,36 +17,68 @@ export function convertirActorFormData(actor: actorCreacionDTO): FormData{
     }
 
     return formData
+    
 }
 
-export function convertirPeliculaAFormData (pelicula: peliculaCreacionDTO): FormData{
+export function convertirPeliculaAFormData (pelicula: peliculaCreacionDTO): FormData {
     const formData = new FormData();
 
     formData.append('titulo', pelicula.titulo);
 
-    if(pelicula.resumen){
+    if (pelicula.resumen) {
         formData.append('resumen', pelicula.resumen);
     }
 
     formData.append('trailer', pelicula.trailer);
     formData.append('enCines', String(pelicula.enCines));
 
-    if(pelicula.fechaLanzamiento)
-    {
+    if (pelicula.fechaLanzamiento) {
         formData.append('fechaLanzamiento', formatearFecha(pelicula.fechaLanzamiento));
-
     }
 
-    if(pelicula.poster)
-    {
-        formData.append('poster', pelicula.poster)
+    // Solo agregar el poster si es un nuevo archivo (File)
+    if (pelicula.poster instanceof File) {
+        formData.append('poster', pelicula.poster);
+    } else if (pelicula.posterURL) {
+        formData.append('posterURL', pelicula.posterURL); // Enviar la URL de la imagen actual
     }
 
     formData.append('generosIds', JSON.stringify(pelicula.generosIds ?? []));
     formData.append('cinesIds', JSON.stringify(pelicula.cinesIds ?? []));
     formData.append('actores', JSON.stringify(pelicula.actores ?? []));
+
     return formData;
 }
+
+
+// export function convertirPeliculaAFormData (pelicula: peliculaCreacionDTO): FormData{
+//     const formData = new FormData();
+
+//     formData.append('titulo', pelicula.titulo);
+
+//     if(pelicula.resumen){
+//         formData.append('resumen', pelicula.resumen);
+//     }
+
+//     formData.append('trailer', pelicula.trailer);
+//     formData.append('enCines', String(pelicula.enCines));
+
+//     if(pelicula.fechaLanzamiento)
+//     {
+//         formData.append('fechaLanzamiento', formatearFecha(pelicula.fechaLanzamiento));
+
+//     }
+
+//     if(pelicula.poster)
+//     {
+//         formData.append('poster', pelicula.poster)
+//     }
+
+//     formData.append('generosIds', JSON.stringify(pelicula.generosIds ?? []));
+//     formData.append('cinesIds', JSON.stringify(pelicula.cinesIds ?? []));
+//     formData.append('actores', JSON.stringify(pelicula.actores ?? []));
+//     return formData;
+// }
 
 function formatearFecha(date: Date){
     date = new Date(date);

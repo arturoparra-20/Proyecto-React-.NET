@@ -12,7 +12,7 @@ function App() {
     <>
       <BrowserRouter>
         <Menu />
-        <div className='flex flex-col min-h-screen justify-center bg-gray-800 text-white'>
+        <div className='flex flex-col min-h-screen justify-center bg-gray-800 text-gray-100'>
           <main className='flex-1 container mx-auto px-4 py-8'>
             <Routes>
               {rutas.map(ruta => (

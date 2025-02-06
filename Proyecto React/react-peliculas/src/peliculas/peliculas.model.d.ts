@@ -27,7 +27,7 @@ export interface peliculaCreacionDTO{
     actores?: actorPeliculaDTO[];
 }
 export interface landingPageDTO {
-    enCartelera?: peliculaDTO[];
+    enCines?: peliculaDTO[];
     proximosEstrenos?: peliculaDTO[];
     carrusel?: peliculaDTO[]
 }
@@ -35,4 +35,14 @@ export interface landingPageDTO {
 export interface peliculasPostGetDTO {
     generos: generoDTO[];
     cines: cineDTO[];
+}
+
+export interface PeliculasPutGetDTO {
+    pelicula: peliculaDTO;
+    generosSeleccionados: generoDTO[];
+    generosNoSeleccionados: generoDTO[];
+    cinesSeleccionados: cineDTO[];
+    cinesNoSeleccionados: cineDTO[];
+    actores: actorPeliculaDTO[];
+
 }

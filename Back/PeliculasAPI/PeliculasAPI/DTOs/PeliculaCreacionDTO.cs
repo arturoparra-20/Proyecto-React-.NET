@@ -15,7 +15,7 @@ namespace PeliculasAPI.DTOs
         public string Trailer { get; set; }
         public bool EnCines { get; set; }
         public DateTime FechaLanzamiento { get; set; }
-        public IFormFile Poster { get; set; }
+        public IFormFile? Poster { get; set; }
         [ModelBinder(BinderType =typeof(TypeBinder<List<int>>))]
         public List<int> GenerosIds { get; set; }
         [ModelBinder(BinderType = typeof(TypeBinder<List<int>>))]
