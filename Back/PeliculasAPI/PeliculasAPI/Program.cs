@@ -1,13 +1,20 @@
 
 
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using PeliculasAPI;
 using PeliculasAPI.ApiBehavior;
 using PeliculasAPI.FIltros;
 using PeliculasAPI.Utilidades;
+using System.Text;
+
+using System.IdentityModel.Tokens.Jwt;
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +60,29 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(opciones =>
+    opciones.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true, 
+        IssuerSigningKey = new SymmetricSecurityKey (
+            Encoding.UTF8.GetBytes(builder.Configuration["llavejwt"])),
+        ClockSkew = TimeSpan.Zero,
+        //NameClaimType = "email"
+    });
+
+builder.Services.AddAuthorization(opciones =>
+{
+    opciones.AddPolicy("EsAdmin", policy => policy.RequireClaim("role", "admin"));
+});
 
 var app = builder.Build();
 
@@ -67,6 +97,8 @@ app.UseCors();
 app.UseStaticFiles();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();    
 
 app.UseAuthorization();
 

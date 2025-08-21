@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@react-leaflet/core": "^2.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -24,10 +29,10 @@
     "react-leaflet": "^4.2.0",
     "react-markdown": "^9.0.1",
     "react-router-dom": "^6.26.2",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "^0.0.0",
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",
-    "sweetalert2": "^11.15.9",
+    "sweetalert2": "^11.6.13",
     "typed-react-markdown": "^0.1.0",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4",
@@ -64,6 +69,7 @@
     "@types/react-bootstrap-typeahead": "^5.1.14",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-slick": "^0.23.13",
+    "react-scripts": "5.0.1",
     "tailwindcss": "^3.4.17"
   }
 }

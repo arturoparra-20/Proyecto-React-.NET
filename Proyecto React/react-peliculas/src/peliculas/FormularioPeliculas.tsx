@@ -55,6 +55,7 @@ export default function FormularioPeliculas (props: FormularioPeliculasProps){
         }}
         validationSchema={Yup.object({
             titulo: Yup.string().required('Este campo es requerido').primeraLetraMayuscula()
+            
         })}
         >
             {formikProps => (

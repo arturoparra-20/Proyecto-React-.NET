@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PeliculasAPI.DTOs;
@@ -9,6 +11,8 @@ namespace PeliculasAPI.Controllers
 {
     [ApiController]
     [Route("api/peliculas")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "EsAdmin")]
+
     public class PeliculasController : ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -25,6 +29,7 @@ namespace PeliculasAPI.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [AllowAnonymous]
         public async Task<ActionResult<PeliculaDTO>> Get (int id)
         {
             var pelicula = await context.Peliculas
@@ -42,7 +47,45 @@ namespace PeliculasAPI.Controllers
             return dto;
         }
 
+
+        [HttpGet("filtrar")]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<PeliculaDTO>>> Filtrar([FromQuery] PeliculasFiltrarDTO peliculasFiltrarDTO)
+
+        {
+
+            var peliculasQueryable = context.Peliculas.AsQueryable();
+
+            if(!string.IsNullOrEmpty(peliculasFiltrarDTO.Titulo))
+            {
+                peliculasQueryable = peliculasQueryable.Where(x => x.Titulo.Contains(peliculasFiltrarDTO.Titulo));
+
+            }
+
+            if (peliculasFiltrarDTO.EnCines)
+            {
+                peliculasQueryable = peliculasQueryable.Where(x => x.EnCines);
+            }
+            if (peliculasFiltrarDTO.ProximosEstrenos)
+            {
+                var hoy = DateTime.Today;
+                peliculasQueryable = peliculasQueryable.Where(x => x.FechaLanzamiento > hoy);
+            }
+
+            if(peliculasFiltrarDTO.GeneroId != 0)
+            {
+                peliculasQueryable = peliculasQueryable
+                    .Where(x => x.PeliculasGeneros.Select(y => y.GeneroId)
+                    .Contains(peliculasFiltrarDTO.GeneroId));
+            }
+
+            await HttpContext.InsertarParametrosPaginacionCabecera(peliculasQueryable); ;
+            var peliculas = await peliculasQueryable.Paginar(peliculasFiltrarDTO.PaginacionDTO).ToListAsync();
+            return mapper.Map<List<PeliculaDTO>>(peliculas);
+        }
+
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<LandingPageDTO>> Get ()
         {
             var top = 6;
