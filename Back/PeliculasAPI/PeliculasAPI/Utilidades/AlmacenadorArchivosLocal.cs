@@ -38,6 +38,10 @@ namespace PeliculasAPI.Utilidades
 
         public async Task<string> GuardarArchivo(string contenedor, IFormFile archivo)
         {
+            if (contenedor == null || contenedor.Contains("../") || contenedor.Contains(@"..\"))
+            {
+                throw new ArgumentException("Invalid file path");
+            }
             var extension = Path.GetExtension(archivo.FileName);
             var nombreArchivo = $"{Guid.NewGuid()}{extension}";
             string folder = Path.Combine(env.WebRootPath, contenedor);
